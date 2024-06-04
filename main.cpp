@@ -96,8 +96,30 @@ char switchPlayer(char currentPlayer)
 int main()
 {
     char board[3][3];
+    char currentPlayer = 'X';
     initializeBoard(board);
-    displayBoard(board);
+
+    while (true)
+    {
+        displayBoard(board);
+        getPlayerMove(board, currentPlayer);
+
+        if (checkWin(board, currentPlayer))
+        {
+            displayBoard(board);
+            cout << "Player " << currentPlayer << " wins!" << endl;
+            break;
+        }
+
+        if (checkDraw(board))
+        {
+            displayBoard(board);
+            cout << "It's a draw!" << endl;
+            break;
+        }
+
+        currentPlayer = switchPlayer(currentPlayer);
+    }
 
     return 0;
 }
