@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits> // for std::numeric_limits
 using namespace std;
 
 void initializeBoard(char board[3][3])
@@ -30,7 +31,6 @@ void displayBoard(const char board[3][3])
     }
 }
 
-// Function to get the player's move
 void getPlayerMove(char board[3][3], char player)
 {
     int row, col;
@@ -38,6 +38,17 @@ void getPlayerMove(char board[3][3], char player)
     {
         cout << "Player " << player << ", enter your move (row and column): ";
         cin >> row >> col;
+
+        // Check if the input is valid
+        if (cin.fail())
+        {
+            cin.clear();                                         // clear the fail flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the invalid input
+            cout << "Invalid input. Please enter numbers for row and column." << endl;
+            continue;
+        }
+
+        // Check if the move is within bounds and the cell is empty
         if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ')
         {
             board[row][col] = player;
