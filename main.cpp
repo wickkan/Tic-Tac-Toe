@@ -87,6 +87,12 @@ bool checkDraw(const char board[3][3])
     return true;
 }
 
+// Function to switch player
+char switchPlayer(char currentPlayer)
+{
+    return (currentPlayer == 'X') ? 'O' : 'X';
+}
+
 int main()
 {
     char board[3][3];
