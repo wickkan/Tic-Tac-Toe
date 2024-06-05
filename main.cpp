@@ -187,6 +187,28 @@ void displayMenu()
     cout << "Choose an option: ";
 }
 
+int playerXWins = 0;
+int playerOWins = 0;
+int draws = 0;
+
+void updateScore(char winner)
+{
+    if (winner == 'X')
+        playerXWins++;
+    else if (winner == 'O')
+        playerOWins++;
+    else
+        draws++;
+}
+
+void displayScore()
+{
+    cout << "Score: " << endl;
+    cout << "Player X: " << playerXWins << endl;
+    cout << "Player O: " << playerOWins << endl;
+    cout << "Draws: " << draws << endl;
+}
+
 int main()
 {
     char board[3][3];
