@@ -104,6 +104,80 @@ char switchPlayer(char currentPlayer)
     return (currentPlayer == 'X') ? 'O' : 'X';
 }
 
+// Function to find the best move for the AI
+int minimax(char board[3][3], bool isMaximizing)
+{
+    // Check for terminal states (win, loss, draw)
+    if (checkWin(board, 'X'))
+        return -1;
+    if (checkWin(board, 'O'))
+        return 1;
+    if (checkDraw(board))
+        return 0;
+
+    if (isMaximizing)
+    {
+        int bestScore = -1000;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (board[i][j] == ' ')
+                {
+                    board[i][j] = 'O';
+                    int score = minimax(board, false);
+                    board[i][j] = ' ';
+                    bestScore = max(score, bestScore);
+                }
+            }
+        }
+        return bestScore;
+    }
+    else
+    {
+        int bestScore = 1000;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (board[i][j] == ' ')
+                {
+                    board[i][j] = 'X';
+                    int score = minimax(board, true);
+                    board[i][j] = ' ';
+                    bestScore = min(score, bestScore);
+                }
+            }
+        }
+        return bestScore;
+    }
+}
+
+// Ai player
+pair<int, int> findBestMove(char board[3][3])
+{
+    int bestScore = -1000;
+    pair<int, int> bestMove = {-1, -1};
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (board[i][j] == ' ')
+            {
+                board[i][j] = 'O';
+                int score = minimax(board, false);
+                board[i][j] = ' ';
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestMove = {i, j};
+                }
+            }
+        }
+    }
+    return bestMove;
+}
+
 int main()
 {
     char board[3][3];
