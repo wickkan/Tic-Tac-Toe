@@ -213,28 +213,52 @@ int main()
 {
     char board[3][3];
     char currentPlayer = 'X';
-    initializeBoard(board);
+    int option;
 
     while (true)
     {
-        displayBoard(board);
-        getPlayerMove(board, currentPlayer);
+        displayMenu();
+        cin >> option;
 
-        if (checkWin(board, currentPlayer))
+        if (option == 3)
+            break;
+
+        initializeBoard(board);
+        currentPlayer = 'X';
+
+        while (true)
         {
             displayBoard(board);
-            cout << "Player " << currentPlayer << " wins!" << endl;
-            break;
+            if (option == 1 || (option == 2 && currentPlayer == 'X'))
+            {
+                getPlayerMove(board, currentPlayer);
+            }
+            else if (option == 2 && currentPlayer == 'O')
+            {
+                pair<int, int> bestMove = findBestMove(board);
+                board[bestMove.first][bestMove.second] = 'O';
+            }
+
+            if (checkWin(board, currentPlayer))
+            {
+                displayBoard(board);
+                cout << "Player " << currentPlayer << " wins!" << endl;
+                updateScore(currentPlayer);
+                break;
+            }
+
+            if (checkDraw(board))
+            {
+                displayBoard(board);
+                cout << "It's a draw!" << endl;
+                updateScore(' ');
+                break;
+            }
+
+            currentPlayer = switchPlayer(currentPlayer);
         }
 
-        if (checkDraw(board))
-        {
-            displayBoard(board);
-            cout << "It's a draw!" << endl;
-            break;
-        }
-
-        currentPlayer = switchPlayer(currentPlayer);
+        displayScore();
     }
 
     return 0;
