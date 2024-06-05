@@ -178,6 +178,15 @@ pair<int, int> findBestMove(char board[3][3])
     return bestMove;
 }
 
+void displayMenu()
+{
+    cout << "Tic-Tac-Toe Game" << endl;
+    cout << "1. Player vs Player" << endl;
+    cout << "2. Player vs AI" << endl;
+    cout << "3. Exit" << endl;
+    cout << "Choose an option: ";
+}
+
 int main()
 {
     char board[3][3];
