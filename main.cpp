@@ -157,7 +157,7 @@ int minimax(char board[3][3], bool isMaximizing)
 pair<int, int> findBestMove(char board[3][3])
 {
     int bestScore = -1000;
-    pair<int, int> bestMove = {-1, -1};
+    pair<int, int> bestMove = make_pair(-1, -1);
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -170,7 +170,7 @@ pair<int, int> findBestMove(char board[3][3])
                 if (score > bestScore)
                 {
                     bestScore = score;
-                    bestMove = {i, j};
+                    bestMove = make_pair(i, j);
                 }
             }
         }
