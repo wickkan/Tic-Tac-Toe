@@ -292,7 +292,7 @@ int main()
         displayMenu();
         cin >> option;
 
-        if (option == 5)
+        if (option == 6)
             break; // Exit
 
         if (option == 3)
@@ -343,6 +343,13 @@ int main()
             { // Save game
                 saveGame(board, currentPlayer);
                 break; // Return to menu after saving
+            }
+
+            if (option == 5)
+            { // Undo move
+                undoMove(board);
+                currentPlayer = switchPlayer(currentPlayer); // Switch back to the previous player
+                break;                                       // Return to menu after undoing
             }
         }
 
