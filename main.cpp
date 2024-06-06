@@ -273,11 +273,21 @@ int main()
         displayMenu();
         cin >> option;
 
-        if (option == 3)
-            break;
+        if (option == 5)
+            break; // Exit
 
-        initializeBoard(board);
-        currentPlayer = 'X';
+        if (option == 3)
+        { // Load game
+            if (!loadGame(board, currentPlayer))
+            {
+                continue; // If loading fails, return to menu
+            }
+        }
+        else
+        {
+            initializeBoard(board);
+            currentPlayer = 'X';
+        }
 
         while (true)
         {
@@ -309,6 +319,12 @@ int main()
             }
 
             currentPlayer = switchPlayer(currentPlayer);
+
+            if (option == 4)
+            { // Save game
+                saveGame(board, currentPlayer);
+                break; // Return to menu after saving
+            }
         }
 
         displayScore();
