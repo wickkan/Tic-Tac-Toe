@@ -67,6 +67,20 @@ void getPlayerMove(char board[3][3], char player)
     }
 }
 
+void undoMove(char board[3][3])
+{
+    if (!moveHistory.empty())
+    {
+        pair<int, int> lastMove = moveHistory.top();
+        moveHistory.pop();
+        board[lastMove.first][lastMove.second] = ' ';
+    }
+    else
+    {
+        cout << "No moves to undo!" << endl;
+    }
+}
+
 // Function to check for a win
 bool checkWin(const char board[3][3], char player)
 {
