@@ -2,6 +2,7 @@
 #include <limits>  // for std::numeric_limits
 #include <fstream> // For file operations
 #include <stack>   // For storing move history
+#include <utility> // For std::pair and std::make_pair
 
 using namespace std;
 
