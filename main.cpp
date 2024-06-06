@@ -185,7 +185,9 @@ void displayMenu()
     cout << "Tic-Tac-Toe Game" << endl;
     cout << "1. Player vs Player" << endl;
     cout << "2. Player vs AI" << endl;
-    cout << "3. Exit" << endl;
+    cout << "3. Load Game" << endl; // Add option to load game
+    cout << "4. Save Game" << endl; // Add option to save game
+    cout << "5. Exit" << endl;
     cout << "Choose an option: ";
 }
 
