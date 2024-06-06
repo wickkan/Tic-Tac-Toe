@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>  // for std::numeric_limits
 #include <fstream> // For file operations
+#include <stack>   // For storing move history
 
 using namespace std;
 
@@ -33,6 +34,8 @@ void displayBoard(const char board[3][3])
     }
 }
 
+stack<pair<int, int>> moveHistory;
+
 void getPlayerMove(char board[3][3], char player)
 {
     int row, col;
@@ -54,6 +57,7 @@ void getPlayerMove(char board[3][3], char player)
         if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ')
         {
             board[row][col] = player;
+            moveHistory.push(make_pair(row, col)); // Save the move
             break;
         }
         else
