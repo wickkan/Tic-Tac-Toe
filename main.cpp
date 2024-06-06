@@ -1,5 +1,7 @@
 #include <iostream>
-#include <limits> // for std::numeric_limits
+#include <limits>  // for std::numeric_limits
+#include <fstream> // For file operations
+
 using namespace std;
 
 void initializeBoard(char board[3][3])
@@ -207,6 +209,55 @@ void displayScore()
     cout << "Player X: " << playerXWins << endl;
     cout << "Player O: " << playerOWins << endl;
     cout << "Draws: " << draws << endl;
+}
+
+// Function to save the game state
+void saveGame(const char board[3][3], char currentPlayer)
+{
+    ofstream outFile("savegame.txt");
+    if (outFile.is_open())
+    {
+        outFile << currentPlayer << endl;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                outFile << board[i][j];
+            }
+            outFile << endl;
+        }
+        outFile.close();
+        cout << "Game saved successfully!" << endl;
+    }
+    else
+    {
+        cout << "Unable to open file for saving." << endl;
+    }
+}
+
+// Function to load the game state
+bool loadGame(char board[3][3], char &currentPlayer)
+{
+    ifstream inFile("savegame.txt");
+    if (inFile.is_open())
+    {
+        inFile >> currentPlayer;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                inFile >> board[i][j];
+            }
+        }
+        inFile.close();
+        cout << "Game loaded successfully!" << endl;
+        return true;
+    }
+    else
+    {
+        cout << "No saved game found." << endl;
+        return false;
+    }
 }
 
 int main()
