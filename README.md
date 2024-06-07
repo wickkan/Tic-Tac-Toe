@@ -10,3 +10,4 @@ This is a simple console-based Tic-Tac-Toe game implemented in C++. The game all
 - Input validation
 - Win and draw detection
 - Console-based interface
+- AI Opponent
