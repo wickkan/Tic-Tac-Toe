@@ -48,8 +48,7 @@ void getPlayerMove(char board[3][3], char player)
         // Check if the input is valid
         if (cin.fail())
         {
-            cin.clear();                                         // clear the fail flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the invalid input
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input. Please enter numbers for row and column." << endl;
             continue;
         }
